@@ -4,12 +4,8 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let input = [];
-
 rl.on('line', function (line) {
     const number = parseInt(line)
-    const judge = number % 2 === 0 ? 'even' : 'odd'
+    const judge = number % 2 ? 'odd' : 'even'
     console.log(`${number} is ${judge}`)
-}).on('close', function () {
-    n = Number(input[0]);
-});
+})
