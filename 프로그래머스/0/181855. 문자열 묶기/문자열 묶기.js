@@ -7,5 +7,5 @@ function solution(strArr) {
     frequency[num] = (frequency[num] || 0) + 1;
   }
 
-  return Math.max(...Object.keys(frequency).map((v) => frequency[v]));
+  return Math.max(...Object.values(frequency));
 }
