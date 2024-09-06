@@ -1,16 +1,7 @@
-function solution(str_list) {
-    const l_index = str_list.indexOf('l');
-    const r_index = str_list.indexOf('r');
-    
-    if (l_index === -1 && r_index === -1) return [];
-    
-    if (l_index !== -1 && (r_index === -1 || l_index < r_index)) {
-        return str_list.slice(0, l_index);
+function solution(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        if (arr[i] === 'l') return arr.slice(0, i);
+        if (arr[i] === 'r') return arr.slice(i + 1);
     }
-    
-    if (r_index !== -1) {
-        return str_list.slice(r_index + 1);
-    }
-    
     return [];
 }
