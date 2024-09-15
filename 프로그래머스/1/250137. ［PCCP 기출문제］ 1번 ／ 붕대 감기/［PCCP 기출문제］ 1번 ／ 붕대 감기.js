@@ -1,35 +1,16 @@
 function solution(bandage, health, attacks) {
-  const [t, x, y] = bandage;
-  const max_health = health;
-  
-  let successCount = 0;
-  let attackIndex = 0;
+  let currHealth = health;
+  let currTime = 0;
 
-  for (let i = 0; i <= attacks[attacks.length - 1][0]; i++) {
-    // 공격 시간에 맞춰 공격 처리
-    if (attackIndex < attacks.length && attacks[attackIndex][0] === i) {
-      health -= attacks[attackIndex][1];
-      attackIndex++;
-      successCount = 0;  // 공격받으면 연속 성공 초기화
-    } else {
-      // 체력 회복
-      health = Math.min(health + x, max_health);
-      successCount++;
-      
-      // t초 연속 성공 시 추가 회복
-      if (successCount === t) {
-        health = Math.min(health + y, max_health);
-        successCount = 0;
-      }
-    }
+  for (let [attackTime, damage] of attacks) {
+    let diffTime = attackTime - currTime - 1;
+    currHealth += diffTime * bandage[1] + Math.floor(diffTime / bandage[0]) * bandage[2];
 
-    // 체력이 0 이하가 되면 즉시 -1 반환
-    if (health <= 0) {
-      return -1;
-    }
+    if (currHealth > health) currHealth = health;
+    currHealth -= damage;
+    if (currHealth <= 0) return -1;
+    currTime = attackTime;
   }
 
-  return health;
+  return currHealth;
 }
-
-
