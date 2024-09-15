@@ -31,7 +31,6 @@ const isOpening = (op_start, op_end, pos) => {
   const [endMin, endSec] = op_end.split(":").map((v) => Number(v));
   const [min, sec] = pos.split(":").map((v) => Number(v));
 
-  // 시작 시간보다 크거나 같음
   const isStartIn = startMin < min || (startMin === min && startSec <= sec);
   const isEndIn = endMin > min || (endMin === min && endSec >= sec);
 
@@ -40,7 +39,6 @@ const isOpening = (op_start, op_end, pos) => {
 
 function solution(video_len, pos, op_start, op_end, commands) {
   const result = commands.reduce((acc, cur) => {
-    console.log(acc);
     if (isOpening(op_start, op_end, acc)) {
       return cur === "next" ? onNext(op_end, video_len) : onPrev(op_end);
     }
