@@ -1,31 +1,12 @@
 function solution(new_id) {
-  // 1단계
-  new_id = new_id.toLowerCase();
+  const answer = new_id
+    .toLowerCase() // 1
+    .replace(/[^a-z0-9._-]/g, "") // 2
+    .replace(/\.{2,}/g, ".") // 3
+    .replace(/^\.|\.$/g, "") // 4
+    .padEnd(1, "a") // 5
+    .slice(0, 15) // 6
+    .replace(/^\.|\.$/g, "");
 
-  // 2단계
-  new_id = new_id.replace(/[^a-z0-9._-]/g, "");
-
-  // 3단계
-  new_id = new_id.replace(/\.{2,}/g, ".");
-
-  // 4단계
-  new_id = new_id.replace(/^\.|\.$/g, "");
-
-  // 5단계
-  if (!new_id) new_id = "a";
-
-  // 6단계
-  if (new_id.length >= 16) {
-    new_id = new_id.slice(0, 15);
-    new_id = new_id.replace(/^\.|\.$/g, "");
-  }
-
-  // 7단계
-  if (new_id.length <= 2) {
-    while (new_id.length <= 2) {
-      new_id += new_id[new_id.length - 1];
-    }
-  }
-
-  return new_id;
+  return answer.padEnd(3, answer[answer.length - 1]); // 7
 }
